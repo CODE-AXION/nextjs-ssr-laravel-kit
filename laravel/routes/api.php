@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Resources\UserResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +29,8 @@ Route::middleware(['auth:sanctum','verified'])->get('/user', function (Request $
         $query->with('permissions');
     }, 'permissions']);
 
-    return $user;
-});
+    return new UserResource($user);
+}); 
 
 
 Route::middleware('auth:sanctum')->group(function () {
